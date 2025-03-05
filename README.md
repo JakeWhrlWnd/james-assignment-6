@@ -1,4 +1,4 @@
-Assignment #6
+<h1>Assignment #6</h1>
 
 Important note for those outside of the USA:  I'm putting this note at the top so that you'll actually read it! If you're outside of the USA, when parsing a date using DateTimeFormatter you'll also need to pass in a Locale for your area (i.e. Locale.CANADA or Locale.UK etc.)
 
