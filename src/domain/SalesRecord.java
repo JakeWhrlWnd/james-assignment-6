@@ -1,4 +1,4 @@
-import java.time.YearMonth;
+package domain;
 
 public class SalesRecord {
 
@@ -36,4 +36,12 @@ public class SalesRecord {
         this.sales = sales;
     }
 
+    @Override
+    public String toString() {
+        return "SalesRecord{" +
+                "year=" + year +
+                ", month=" + month +
+                ", sales=" + sales +
+                '}';
+    }
 }
