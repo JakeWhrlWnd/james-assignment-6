@@ -1,31 +1,30 @@
 package model;
 
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+
 public class SalesRecord {
 
-    private int year;
-    private int month;
+    private YearMonth date;
     private int sales;
 
-    public SalesRecord(int year, int month, int sales) {
-        this.year = year;
-        this.month = month;
+    public SalesRecord(YearMonth date, int sales) {
+        this.date = date;
         this.sales = sales;
     }
 
-    public int getYear() {
-        return year;
+    public SalesRecord(String date, int sales) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-yy");
+        this.date = YearMonth.parse(date, formatter);
+        this.sales = sales;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public YearMonth getDate() {
+        return date;
     }
 
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
+    public void setDate(YearMonth date) {
+        this.date = date;
     }
 
     public int getSales() {
@@ -36,11 +35,15 @@ public class SalesRecord {
         this.sales = sales;
     }
 
+    public String getFormattedDate(String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return date.format(formatter);
+    }
+
     @Override
     public String toString() {
         return "SalesRecord{" +
-                "year=" + year +
-                ", month=" + month +
+                "date=" + date.format(DateTimeFormatter.ofPattern("yyyy-MM")) +
                 ", sales=" + sales +
                 '}';
     }
