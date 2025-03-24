@@ -1,11 +1,12 @@
-import service.FileService;
+import com.salesrecordsapp.service.SalesRecordService;
+
 
 public class SalesDataApplication {
 
     public static void main(String[] args) {
-        FileService fileService = new FileService();
+        SalesRecordService salesRecordService = new SalesRecordService();
 
-        System.out.println(fileService.read("C:\\Users\\JustJ\\OneDrive\\git\\james-assignment-6\\model3.csv"));
+        System.out.println(salesRecordService.read("model3.csv"));
 //        System.out.println("Model 3 Yearly Sales Report");
 //        System.out.println("---------------------------");
 //        System.out.println("2017 -> ####");

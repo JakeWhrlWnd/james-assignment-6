@@ -1,4 +1,4 @@
-package service;
+package com.salesrecordsapp.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileService {
 
-    public List<String> readFile(String fileName) {
+    public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {

@@ -1,4 +1,4 @@
-package model;
+package com.salesrecordsapp.model;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -7,11 +7,6 @@ public class SalesRecord {
 
     private YearMonth date;
     private int sales;
-
-    public SalesRecord(YearMonth date, int sales) {
-        this.date = date;
-        this.sales = sales;
-    }
 
     public SalesRecord(String date, int sales) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM-yy");
@@ -33,11 +28,6 @@ public class SalesRecord {
 
     public void setSales(int sales) {
         this.sales = sales;
-    }
-
-    public String getFormattedDate(String pattern) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        return date.format(formatter);
     }
 
     @Override
