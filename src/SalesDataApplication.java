@@ -1,39 +1,24 @@
 import com.salesrecordsapp.model.SalesRecord;
+import com.salesrecordsapp.service.FileService;
 import com.salesrecordsapp.service.SalesRecordService;
+
+import java.util.List;
 
 
 public class SalesDataApplication {
 
     public static void main(String[] args) {
-        SalesRecordService salesRecordService = new SalesRecordService();
 
-//        System.out.println("Model 3 Yearly Sales Report");
-//        System.out.println("---------------------------");
-//        System.out.println("2017 -> ####");
-//        System.out.println("2018 -> ####");
-//        System.out.println("2019 -> ####");
-//        System.out.println();
-//        System.out.println("The best month for Model 3 was: yyyy-MM");
-//        System.out.println("The worst mont for Model 3 was: yyyy-MM");
-//
-//        System.out.println("Model S Yearly Sales Report");
-//        System.out.println("---------------------------");
-//        System.out.println("2016 -> ####");
-//        System.out.println("2017 -> ####");
-//        System.out.println("2018 -> ####");
-//        System.out.println("2019 -> ####");
-//        System.out.println();
-//        System.out.println("The best month for Model S was: yyyy-MM");
-//        System.out.println("The worst mont for Model S was: yyyy-MM");
-//
-//        System.out.println("Model X Yearly Sales Report");
-//        System.out.println("---------------------------");
-//        System.out.println("2016 -> ####");
-//        System.out.println("2017 -> ####");
-//        System.out.println("2018 -> ####");
-//        System.out.println("2019 -> ####");
-//        System.out.println();
-//        System.out.println("The best month for Model X was: yyyy-MM");
-//        System.out.println("The worst mont for Model X was: yyyy-MM");
+        FileService fileService = new FileService();
+        SalesRecordService salesRecordService = new SalesRecordService(fileService);
+
+        List<SalesRecord> model3Records = salesRecordService.loadSalesRecords("model3.csv");
+        salesRecordService.printReport(model3Records, "Model 3");
+
+        List<SalesRecord> modelSRecords = salesRecordService.loadSalesRecords("modelS.csv");
+        salesRecordService.printReport(modelSRecords, "Model S");
+
+        List<SalesRecord> modelXRecords = salesRecordService.loadSalesRecords("modelX.csv");
+        salesRecordService.printReport(modelXRecords, "Model X");
     }
 }

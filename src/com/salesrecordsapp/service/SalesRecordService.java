@@ -2,14 +2,17 @@ package com.salesrecordsapp.service;
 
 import com.salesrecordsapp.model.SalesRecord;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.YearMonth;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SalesRecordService {
 
-    private final FileService fileService = new FileService();
+    private final FileService fileService;
+
+    public SalesRecordService(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     public List<SalesRecord> loadSalesRecords(String fileName) {
         return fileService.read(fileName).stream()
@@ -43,7 +46,40 @@ public class SalesRecordService {
                 ));
     }
 
-    // filterSales()
+    public YearMonth getBestMonth(List<SalesRecord> salesRecords) {
+        return salesRecords.stream()
+                .filter(Objects::nonNull)
+                .max(Comparator.comparingInt(SalesRecord::getSales))
+                .map(SalesRecord::getDate)
+                .orElseThrow(() -> new IllegalStateException("No sales records available"));
+    }
 
-    // printSales()
+    public YearMonth getWorstMonth(List<SalesRecord> salesRecords) {
+        return salesRecords.stream()
+                .filter(Objects::nonNull)
+                .min(Comparator.comparingInt(SalesRecord::getSales))
+                .map(SalesRecord::getDate)
+                .orElseThrow(() -> new IllegalStateException("No sales records available"));
+    }
+
+    public void printReport(List<SalesRecord> salesRecords, String vehicleModel) {
+        System.out.println(vehicleModel + " Yearly Sales Report");
+        System.out.println("---------------------------");
+
+        Map<Integer,Integer> yearlySales = getYearlySales(salesRecords);
+
+        yearlySales.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry -> System.out.printf("%d -> $%,.2f%n", entry.getKey(), (double) entry.getValue()));
+
+        System.out.println();
+
+        YearMonth bestMonth = getBestMonth(salesRecords);
+        YearMonth worstMonth = getWorstMonth(salesRecords);
+
+        System.out.println("The best month for " + vehicleModel + " was: " + (bestMonth != null ? bestMonth : "N/A"));
+        System.out.println("The worst month for " + vehicleModel + " was: " + (worstMonth != null ? worstMonth : "N/A"));
+
+        System.out.println();
+    }
 }
