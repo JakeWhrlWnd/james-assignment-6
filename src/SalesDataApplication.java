@@ -2,7 +2,7 @@ import com.salesrecordsapp.model.SalesRecord;
 import com.salesrecordsapp.service.FileService;
 import com.salesrecordsapp.service.SalesRecordService;
 
-import java.util.List;
+import java.util.*;
 
 
 public class SalesDataApplication {
@@ -12,13 +12,12 @@ public class SalesDataApplication {
         FileService fileService = new FileService();
         SalesRecordService salesRecordService = new SalesRecordService(fileService);
 
-        List<SalesRecord> model3Records = salesRecordService.loadSalesRecords("model3.csv");
-        salesRecordService.printReport(model3Records, "Model 3");
+        String[] vehicleModels = {"Model 3", "Model S", "Model X"};
+        String[] fileNames = {"model3.csv", "modelS.csv", "modelX.csv"};
 
-        List<SalesRecord> modelSRecords = salesRecordService.loadSalesRecords("modelS.csv");
-        salesRecordService.printReport(modelSRecords, "Model S");
-
-        List<SalesRecord> modelXRecords = salesRecordService.loadSalesRecords("modelX.csv");
-        salesRecordService.printReport(modelXRecords, "Model X");
+        for (int i = 0; i < vehicleModels.length; i++) {
+            List<SalesRecord> salesRecords = salesRecordService.loadSalesRecords(fileNames[i]);
+            salesRecordService.printReport(salesRecords, vehicleModels[i]);
+        }
     }
 }

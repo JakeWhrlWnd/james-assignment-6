@@ -70,7 +70,7 @@ public class SalesRecordService {
 
         yearlySales.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> System.out.printf("%d -> $%,.2f%n", entry.getKey(), (double) entry.getValue()));
+                .forEach(entry -> System.out.printf("%d -> %d%n", entry.getKey(), entry.getValue()));
 
         System.out.println();
 
