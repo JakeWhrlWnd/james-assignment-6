@@ -1,3 +1,4 @@
+import com.salesrecordsapp.model.SalesRecord;
 import com.salesrecordsapp.service.SalesRecordService;
 
 
@@ -6,7 +7,6 @@ public class SalesDataApplication {
     public static void main(String[] args) {
         SalesRecordService salesRecordService = new SalesRecordService();
 
-        System.out.println(salesRecordService.read("model3.csv"));
 //        System.out.println("Model 3 Yearly Sales Report");
 //        System.out.println("---------------------------");
 //        System.out.println("2017 -> ####");
